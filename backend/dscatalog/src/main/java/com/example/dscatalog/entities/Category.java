@@ -3,6 +3,7 @@ package com.example.dscatalog.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 @Entity
 @Table(name="tb_category")
@@ -12,6 +13,11 @@ public class Category implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant createdAt;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant updatedAt;
+
     public Category() {
     }
 
@@ -36,6 +42,16 @@ public class Category implements Serializable {
         this.name = name;
     }
 
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,8 +59,19 @@ public class Category implements Serializable {
         return Objects.equals(id, category.id) && Objects.equals(name, category.name);
     }
 
+
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
+    }
+    // antes de inserir atualiza a data de criação
+    @PrePersist
+    public void prePersist(){
+        createdAt = Instant.now();
+    }
+    // atualiza a hora em um update
+    @PreUpdate
+    public void preUpdate(){
+        updatedAt = Instant.now();
     }
 }
