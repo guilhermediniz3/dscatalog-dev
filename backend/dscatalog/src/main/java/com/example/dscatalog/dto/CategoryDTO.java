@@ -1,5 +1,10 @@
 package com.example.dscatalog.dto;
 
+
+
+
+
+
 import com.example.dscatalog.entities.Category;
 
 import java.io.Serializable;
