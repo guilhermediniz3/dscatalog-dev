@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,10 +25,10 @@ public class CategoryService {
     @Autowired
     private CategoryRepository repository;
 
-// Page já é um stream então foi removido do codigo junto do collectors.tolist
+
     @Transactional(readOnly = true)
-    public Page<CategoryDTO> findAll(PageRequest pageRequest) {
-      Page<Category>list= repository.findAll(pageRequest);
+    public Page<CategoryDTO> findAll(Pageable pageable) {
+      Page<Category>list= repository.findAll(pageable);
     return list.map(Category -> new CategoryDTO(Category));
 
 
