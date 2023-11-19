@@ -1,15 +1,13 @@
 package com.example.dscatalog.dto;
 
-import com.example.dscatalog.entities.Category;
-import com.example.dscatalog.entities.Product;
-import jakarta.persistence.Column;
-
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.example.dscatalog.entities.Category;
+import com.example.dscatalog.entities.Product;
 
 public class ProductDTO implements Serializable {
     private static final long serialVersionUID= 1L;

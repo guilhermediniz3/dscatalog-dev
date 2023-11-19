@@ -5,9 +5,9 @@ package com.example.dscatalog.dto;
 
 
 
-import com.example.dscatalog.entities.Category;
-
 import java.io.Serializable;
+
+import com.example.dscatalog.entities.Category;
 
 public class CategoryDTO implements Serializable {
     private static final long serialVersionUID= 1L;

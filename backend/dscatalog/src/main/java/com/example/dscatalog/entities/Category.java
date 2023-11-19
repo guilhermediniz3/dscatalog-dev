@@ -1,11 +1,20 @@
 package com.example.dscatalog.entities;
 
-import jakarta.persistence.*;
-
-
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 @Entity
 @Table(name="tb_category")
 public class Category implements Serializable {
@@ -18,8 +27,8 @@ public class Category implements Serializable {
     private Instant createdAt;
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updatedAt;
-
-
+   @ManyToMany(mappedBy = "categories")
+  private Set<Product> products = new HashSet<>();
     public Category() {
     }
 
@@ -64,6 +73,9 @@ public class Category implements Serializable {
         return Objects.equals(id, category.id) && Objects.equals(name, category.name);
     }
 
+    public Set<Product> getProducts() {
+        return products;
+    }
 
     @Override
     public int hashCode() {
